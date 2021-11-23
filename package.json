@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "reflect-metadata": "^0.1.13",
     "tsc-watch": "^4.5.0"
   },
   "devDependencies": {
