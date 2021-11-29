@@ -4,10 +4,12 @@
  * сохраняет их в поле fields
  */
 
+
+
 class SimpleExample{
-    @FieldCount()
+    //@FieldCount()
     public name: string;
-    @FieldCount()
+    //@FieldCount()
     public age: number;
 
     constructor(name: string) {
