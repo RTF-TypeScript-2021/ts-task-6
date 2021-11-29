@@ -5,6 +5,15 @@
  * Пример: SimpleCreature created with args: Пушок, 12
  */
 
+ export function LogClassInstance<T extends { new(...args: any[]): object }>(targetConstructor: T) {
+    return class extends targetConstructor {
+        constructor(...args: any[]) {
+            console.log(`${targetConstructor.name} created with args : ${args.join(', ')}`);
+            super(...args);
+        }
+    }
+}
+
 @LogClassInstance
 export class SimpleCreature{
     public readonly name: string;
@@ -15,8 +24,4 @@ export class SimpleCreature{
         this.name = name;
         this.age = age;
     }
-}
-
-
-export function LogClassInstance(){
 }

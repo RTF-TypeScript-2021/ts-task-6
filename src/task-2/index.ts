@@ -5,6 +5,14 @@
  *
  */
 
+ export function OnlyInteger(target: any, targetKey: string, descriptor: TypedPropertyDescriptor<Function>) {
+    const method = target[targetKey];
+
+    descriptor.value = function (...args: number[]) {
+        return method.call(this, args.map(x => Math.round(x)));
+    }
+}
+
 export class Square{
     @OnlyInteger
     public getArea(sideLength: number){
