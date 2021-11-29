@@ -8,7 +8,7 @@ import 'reflect-metadata';
 
 export class SimpleExample {
     @FieldCount
-    public name: string = "131";
+    public name: string;
     @FieldCount
     public age: number;
 
