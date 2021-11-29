@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /**
  * Задание 1. Логгирование создание класса
  * Реализуйте декоратор @LogClassInstance который будет логировать создание обьекта в консоль.
@@ -18,5 +19,14 @@ export class SimpleCreature{
 }
 
 
-export function LogClassInstance(){
+export function LogClassInstance<TFunction extends Function> (constructor: TFunction): TFunction{
+    return class extends constructor {
+        constructor(name: string, age: number) {
+            super(name, age);
+            console.log(`SimpleCreature created with args: ${name}, ${age}`);
+        }
+    }
 }
+
+const gg= new SimpleCreature("Pushok", 12);
+console.log(gg.name)
