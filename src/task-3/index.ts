@@ -15,3 +15,8 @@ export class PartlyExtendableCreature{
     }
 }
 
+const a = new PartlyExtendableCreature('a');
+
+function PreventExtensions<TFunction extends Function>(target: TFunction): void{
+    Object.seal(target.prototype);
+}

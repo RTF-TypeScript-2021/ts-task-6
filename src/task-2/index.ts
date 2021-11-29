@@ -11,3 +11,16 @@ export class Square{
         return sideLength * sideLength;
     }
 }
+
+function OnlyInteger(target: Object, method: string, descriptor: PropertyDescriptor){
+    let originalMethod = descriptor.value;
+    descriptor.value = function(...args: number[]){
+        const intArgs = args.map(x => Math.round(x));
+        let returnValue = originalMethod.apply(this, intArgs);
+        return returnValue;
+    }
+}
+
+
+const sqr = new Square();
+console.log(sqr.getArea(12.4));

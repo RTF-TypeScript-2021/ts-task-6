@@ -10,7 +10,6 @@ export class SimpleCreature{
     public readonly name: string;
     public readonly age: number;
 
-
     constructor(name: string, age: number) {
         this.name = name;
         this.age = age;
@@ -18,5 +17,15 @@ export class SimpleCreature{
 }
 
 
-export function LogClassInstance(){
+export function LogClassInstance<TFunction extends Function>(target: TFunction): TFunction{
+    let newConstructor: Function = function(name:string, age: number){
+        this.name = name;
+        this.age = age;
+        const initialArgs = [name, age].filter(arg => !!arg).join(', ');
+        console.log(`SimpleCreature created with args: ${initialArgs}`);
+    }
+
+    return <TFunction>newConstructor;
 }
+
+const a = new SimpleCreature("v", 10);
