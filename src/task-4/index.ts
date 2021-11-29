@@ -4,13 +4,27 @@
  * сохраняет их в поле fields
  */
 
+ import "reflect-metadata";
+
+
 class SimpleExample{
-    @FieldCount()
+    @FieldCount
     public name: string;
-    @FieldCount()
+
+    @FieldCount
     public age: number;
 
     constructor(name: string) {
         this.name = name;
+
+    }
+}
+
+function FieldCount(target: Object, key: string) {
+    const controler = Reflect.getMetadata("design:type",target, key);
+    if (target.hasOwnProperty('fields')){
+        target.fields.set(key, controler);
+    } else{
+        target['fields'] = new Map([[key,  controler]]);
     }
 }

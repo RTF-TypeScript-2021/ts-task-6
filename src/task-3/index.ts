@@ -15,3 +15,12 @@ export class PartlyExtendableCreature{
     }
 }
 
+
+export function PreventExtensions<T extends { new(...args: any[]): object }>(Constructor: T) {
+    return class extends Constructor {
+        constructor(...args: any[]) {
+            super(...args);
+            Object.freeze(this);
+        }
+    }
+}
