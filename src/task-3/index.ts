@@ -15,3 +15,7 @@ export class PartlyExtendableCreature{
     }
 }
 
+export function PreventExtensions(target: { [key: string]: any}) {
+    Object.seal(target);
+    Object.seal(target.prototype)
+}

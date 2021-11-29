@@ -11,3 +11,14 @@ export class Square{
         return sideLength * sideLength;
     }
 }
+
+export function OnlyInteger(target: { [key: string]: any },
+                            key: string,
+                            descriptor: TypedPropertyDescriptor<(...args: any[]) => number>) {
+    const origin = descriptor.value;
+    descriptor.value = function (...args: any[]) {
+        const returnValue: number = origin.apply(this, args);
+
+        return Math.round(returnValue);
+    }
+}
