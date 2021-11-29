@@ -11,3 +11,13 @@ export class Square{
         return sideLength * sideLength;
     }
 }
+
+export function OnlyInteger(target: any, targetKey: string | symbol, descriptor: TypedPropertyDescriptor<Function>) {
+    const method = target[targetKey];
+    descriptor.value = function (...args: number[]) {
+        return method.call(this, args.map(x => Math.round(x)));
+    }
+}
+
+let square = new Square();
+console.log(square.getArea(5.9));

@@ -18,5 +18,14 @@ export class SimpleCreature{
 }
 
 
-export function LogClassInstance(){
+export function LogClassInstance(target: any) {
+    const f: any = function (...args: any) {
+        console.log(
+            `${target.name} created with args: ${Object.values(args).reduce((r, c) => r + c.toString() + ", ", "")}`
+                .slice(0, -2));
+        return new target(...args);
+    }
 }
+
+const individualPredmrinimatel = new SimpleCreature('SuchkovGeorgiyIgorevich', 19);
+console.log(individualPredmrinimatel.name)
