@@ -5,7 +5,12 @@ import { LogClassInstance } from '../task-1';
  * Реализуйте декоратор класса, который предотвратит дальнейшее добавление/изменение функций класса.
  */
 
-@LogClassInstance
+function PreventExtensions(constructor: Function){
+    Object.seal(constructor);
+    Object.seal(constructor.prototype);
+}
+
+//@LogClassInstance
 @PreventExtensions
 export class PartlyExtendableCreature{
     public readonly name: string;

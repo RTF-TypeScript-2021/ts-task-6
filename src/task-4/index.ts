@@ -14,3 +14,7 @@ class SimpleExample{
         this.name = name;
     }
 }
+
+function FieldCount(target: Object, propertyKey: string | symbol): any{
+    this
+}
