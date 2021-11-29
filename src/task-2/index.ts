@@ -11,3 +11,11 @@ export class Square{
         return sideLength * sideLength;
     }
 }
+
+function OnlyInteger(target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
+    descriptor.value = function(sideLength: number){
+        const roundSideLength = Math.round(sideLength)
+        
+        return roundSideLength * roundSideLength;
+    }
+}
