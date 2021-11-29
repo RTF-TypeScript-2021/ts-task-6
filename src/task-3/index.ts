@@ -5,6 +5,13 @@ import { LogClassInstance } from '../task-1';
  * Реализуйте декоратор класса, который предотвратит дальнейшее добавление/изменение функций класса.
  */
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+function PreventExtensions<TFunction extends Function>(constructor: TFunction) {
+    console.log("sealed decorator");
+    Object.seal(constructor);
+    Object.seal(constructor.prototype);
+}
+
 @LogClassInstance
 @PreventExtensions
 export class PartlyExtendableCreature{
