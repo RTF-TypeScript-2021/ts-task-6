@@ -5,9 +5,17 @@
  *
  */
 
-export class Square{
+export class Square {
     @OnlyInteger
-    public getArea(sideLength: number){
+    public getArea(sideLength: number) {
         return sideLength * sideLength;
+    }
+}
+
+export function OnlyInteger(target: any, targetKey: string, descriptor: TypedPropertyDescriptor<Function>) {
+    const method = target[targetKey];
+
+    descriptor.value = function (...args: number[]) {
+        return method.call(this, args.map(x => Math.round(x)));
     }
 }

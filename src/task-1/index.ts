@@ -6,10 +6,9 @@
  */
 
 @LogClassInstance
-export class SimpleCreature{
+export class SimpleCreature {
     public readonly name: string;
     public readonly age: number;
-
 
     constructor(name: string, age: number) {
         this.name = name;
@@ -17,6 +16,13 @@ export class SimpleCreature{
     }
 }
 
+export function LogClassInstance(target: any) {
+    const f: any = function (...args: any) {
+        console.log(
+            `${target.name} created with args: ${Object.values(args).reduce((r, c) => r + c.toString() + ", ", "")}`
+                .slice(0, -2));
+        return new target(...args);
+    }
 
-export function LogClassInstance(){
+    return f;
 }

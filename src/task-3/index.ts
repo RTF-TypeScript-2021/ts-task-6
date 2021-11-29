@@ -1,4 +1,4 @@
-import { LogClassInstance } from '../task-1';
+import {LogClassInstance} from '../task-1';
 
 /**
  * Задание 3. No more extensions!
@@ -7,7 +7,7 @@ import { LogClassInstance } from '../task-1';
 
 @LogClassInstance
 @PreventExtensions
-export class PartlyExtendableCreature{
+export class PartlyExtendableCreature {
     public readonly name: string;
 
     constructor(name: string) {
@@ -15,3 +15,7 @@ export class PartlyExtendableCreature{
     }
 }
 
+export function PreventExtensions(constructor: Function) {
+    Object.seal(constructor);
+    Object.seal(constructor.prototype);
+}

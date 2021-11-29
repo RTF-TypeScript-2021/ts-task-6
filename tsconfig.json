@@ -1,25 +1,26 @@
 {
-    "include": [
-        "./src/**/*"
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/task-1/specs"
+  ],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": [
+      "es6",
+      "dom"
     ],
-    "exclude": [
-        "node_modules",
-        "src/task-1/specs"
-    ],
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "lib": [
-            "es6",
-            "dom"
-        ],
-        "allowJs": false,
-        "outDir": "build",
-        "rootDir": ".",
-        "strict": false,
-        "noImplicitAny": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "experimentalDecorators": true
-    }
+    "allowJs": false,
+    "outDir": "build",
+    "rootDir": ".",
+    "strict": false,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
 }
