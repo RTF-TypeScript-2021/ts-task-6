@@ -20,7 +20,6 @@ class SimpleExample{
 
 function FieldCount(target: Object, key: string) {
     const type = Reflect.getMetadata("design:type",target, key);
-    // Переопределяем декорируемое свойство
     if (target.hasOwnProperty('fields')){
         target.fields.set(key,type);
     }else{
