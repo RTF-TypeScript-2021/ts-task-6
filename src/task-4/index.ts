@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -8,7 +9,7 @@
  * сохраняет их в поле fields
  */
 import 'reflect-metadata'
-const formatMetadataKey = Symbol("fiedls");
+const formatMetadataKey = Symbol("design:fiedls");
 class SimpleExample{
     @FieldCount()
     public name: string;
@@ -27,13 +28,15 @@ function FieldCount() {
         } 
         const meta = Reflect.getMetadata(formatMetadataKey, target);
         Reflect.defineProperty(meta, key, {
-            value: target[key],
+            value: {value: target[key], 
+            type: typeof (target[key])},
             writable: true
         });
         let val = target[key];
         Reflect.defineProperty(target as Record<string, unknown>, key, {
             set(value) {
-                meta[key] = value;             
+                meta[key].value = value;
+                meta[key].type = typeof(value);          
                 val = value;
             },
             get() {
