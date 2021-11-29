@@ -1,10 +1,3 @@
-/**
- * Задание 1. Логгирование создание класса
- * Реализуйте декоратор @LogClassInstance который будет логировать создание обьекта в консоль.
- * Формат лога: SimpleCreature created with args : ...${args}
- * Пример: SimpleCreature created with args: Пушок, 12
- */
-
 @LogClassInstance
 export class SimpleCreature{
     public readonly name: string;
@@ -17,6 +10,15 @@ export class SimpleCreature{
     }
 }
 
+export function LogClassInstance(constructor: TClassFunction): any {
+    return function<T> (...args: T[]) {
+        console.log(`${constructor.name} created with args: ${args.toString()}`);
 
-export function LogClassInstance(){
+        return new constructor(...args) as TClassFunction;
+    }
 }
+
+export type TClassFunction = new (...args: any[]) => any;
+
+const inst1 = new SimpleCreature('s1', 1); // to log
+const inst2 = new SimpleCreature('s2', 12);

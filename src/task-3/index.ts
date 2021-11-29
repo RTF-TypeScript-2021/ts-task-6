@@ -1,9 +1,4 @@
-import { LogClassInstance } from '../task-1';
-
-/**
- * Задание 3. No more extensions!
- * Реализуйте декоратор класса, который предотвратит дальнейшее добавление/изменение функций класса.
- */
+import { LogClassInstance, TClassFunction } from '../task-1';
 
 @LogClassInstance
 @PreventExtensions
@@ -15,3 +10,14 @@ export class PartlyExtendableCreature{
     }
 }
 
+function PreventExtensions(constructor: TClassFunction): any {
+    return class extends constructor {
+        constructor (...args: object[]) {
+            super(...args);
+            Object.freeze(this);
+        }
+    }
+}
+
+const inst = new PartlyExtendableCreature('123');
+console.log(Object.isFrozen(inst)) // true
