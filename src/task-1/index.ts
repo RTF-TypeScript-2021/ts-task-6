@@ -18,5 +18,12 @@ export class SimpleCreature{
 }
 
 
-export function LogClassInstance(){
+export function LogClassInstance<TFunction extends Function >(target: TFunction): TFunction{
+    const logClass: Function = function (...args:any[]) {
+        console.log(`${target.name} created with args: ${args.join(', ')}`);
+    }
+
+    return <TFunction>logClass;
 }
+
+const test = new SimpleCreature("Roma", 228);

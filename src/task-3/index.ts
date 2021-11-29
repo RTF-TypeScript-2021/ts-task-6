@@ -15,3 +15,8 @@ export class PartlyExtendableCreature{
     }
 }
 
+function PreventExtensions(target: Function) {
+    Object.seal(target);
+    Object.seal(target.prototype);
+    console.log("No more extensions!");
+}
