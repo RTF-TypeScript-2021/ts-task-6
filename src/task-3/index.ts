@@ -4,7 +4,7 @@ import { LogClassInstance } from "../task-1";
  * Задание 3. No more extensions!
  * Реализуйте декоратор класса, который предотвратит дальнейшее добавление/изменение функций класса.
  */
-function PreventExtensions(target: Function):void{
+function PreventExtensions<T extends {new (...args: any[]): object}>(target: T):void{
     Object.seal(target);
     Object.seal(target.prototype);
 }
@@ -18,11 +18,3 @@ export class PartlyExtendableCreature{
         this.name = name;
     }
 }
-
-
-Object.defineProperty(PartlyExtendableCreature, 
-    'index', {
-    value: 101
-});
-//@ts-ignore
-console.log(PartlyExtendableCreature.param) 

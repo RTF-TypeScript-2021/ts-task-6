@@ -17,12 +17,12 @@ export class SimpleCreature{
     }
 }
 
-export function LogClassInstance<TFunction extends Function >(constructor: TFunction): TFunction{
-    const newConstructor: Function = function(...args:any[]){
+export function LogClassInstance<TFunction extends {new (...args: any[]): object} >(constructor: TFunction): TFunction{
+    const newConstructor: (...args:any[])=>any = function(...args:any[]){
         console.log(`${constructor.name} created with args: ${args.join(", ")}`);
         constructor.apply(this, args);
         Object.setPrototypeOf(this, constructor.prototype as object);
-        }
+    }
 
-    return <TFunction>newConstructor;
+    return <TFunction>(newConstructor as unknown);
 }
