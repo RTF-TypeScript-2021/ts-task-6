@@ -4,6 +4,8 @@
  * сохраняет их в поле fields
  */
 
+import 'reflect-metadata'
+
 class SimpleExample{
     @FieldCount()
     public name: string;
@@ -12,5 +14,15 @@ class SimpleExample{
 
     constructor(name: string) {
         this.name = name;
+    }
+}
+
+function FieldCount(target: { [key: string]: any }, key: string) {
+    const type = Reflect.getMetadata('design:type', target, key);
+
+    if (target.hasOwnProperty('fields')) {
+        target['fields'] = new Map([[key, type]]);
+    } else {
+        target.fields.set(key, type);;
     }
 }
