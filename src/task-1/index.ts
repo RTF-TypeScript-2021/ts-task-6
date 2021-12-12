@@ -6,7 +6,7 @@
  */
 
 @LogClassInstance
-export class SimpleCreature{
+class SimpleCreature{
     public readonly name: string;
     public readonly age: number;
 
@@ -17,6 +17,13 @@ export class SimpleCreature{
     }
 }
 
-
-export function LogClassInstance(){
+export function LogClassInstance<T extends { new (...args: any[]): { [key: string]: any} }>(target: T){
+    return class extends target {
+        constructor(...args: any[]) {
+            super(args);
+            console.log(`${typeof target} created with args: ${args.toString()}`);
+        }
+    }
 }
+
+const nsdl = new SimpleCreature("sdas",34);
