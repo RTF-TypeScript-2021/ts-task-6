@@ -1,14 +1,15 @@
-import 'reflect-metadata';
 /**
  * Задание 4 - Reflect Metadata
  * Напишите декоратор FieldCount который через Reflection API получает информацию о полях класса и
  * сохраняет их в поле fields
  */
+ import 'reflect-metadata'
 
-class SimpleExample{
-    @FieldCount
+
+export class SimpleExample{
+    @FieldCount()
     public name: string;
-    @FieldCount
+    @FieldCount()
     public age: number;
 
     constructor(name: string) {
@@ -16,7 +17,13 @@ class SimpleExample{
     }
 }
 
-function FieldCount(target: { [key: string]: any }, targetKey: string) {
-    const actTarget = Reflect.getMetadata('design:type', target, targetKey);
-    target["fields"].push(`Поле ${targetKey} у ${target.constructor.name} имеет тип ${actTarget.name}\n`);
+function FieldCount() : any {
+    return (target: any, propertyKey: string | symbol) => {
+        const actTarget = Reflect.getMetadata('design:type', target, propertyKey);
+        if (target['fields'] === undefined){
+            target['fields'] = new Map([[propertyKey, actTarget]]);
+        } else {
+            target.fields.set(propertyKey, actTarget);
+        }
+    }
 }

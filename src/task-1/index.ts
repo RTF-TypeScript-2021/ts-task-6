@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /**
  * Задание 1. Логгирование создание класса
  * Реализуйте декоратор @LogClassInstance который будет логировать создание обьекта в консоль.
@@ -18,14 +21,12 @@ export class SimpleCreature{
 }
 
 
-export function LogClassInstance(target: any) {
-    const f: any = function (...args: any) {
-        console.log(
-            `${target.name} created with args: ${Object.values(args).reduce((r, c) => r + c.toString() + ", ", "")}`
-                .slice(0, -2));
-        return new target(...args);
+export function LogClassInstance(constructor: any) : any {
+    return function (...args: any[]) {
+        console.log(`${constructor.name} created with args: ${args.reduce((r, c) => r + c.toString() + ", ", "")}`);
+        return new constructor(...args);
     }
 }
 
 const individualPredmrinimatel = new SimpleCreature('SuchkovGeorgiyIgorevich', 19);
-console.log(individualPredmrinimatel.name)
+console.log(individualPredmrinimatel)
