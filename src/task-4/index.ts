@@ -17,10 +17,11 @@ class SimpleExample{
 }
 
 function FieldCount(target: { [key: string]: any }, key: string) {
-        const type = Reflect.getMetadata("design:type", target, key);
-        if (!target.hasOwnProperty('fields')) {
-            target.fields = new Set();
-        }
+    const type = Reflect.getMetadata('design:type', target, key);
 
-        target.fields.add(type);
+    if (target.hasOwnProperty('fields')) {
+        target.fields.set(key, type);
+    } else {
+        target['fields'] = new Map([[key, type]]);
+    }
 }
