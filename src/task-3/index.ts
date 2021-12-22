@@ -15,3 +15,8 @@ export class PartlyExtendableCreature{
     }
 }
 
+function PreventExtensions<T extends { new(...args: any[]): object }>(constructor: T) {
+    Object.seal(constructor);
+    Object.seal(constructor.prototype);
+}
+

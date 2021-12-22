@@ -4,6 +4,8 @@
  * сохраняет их в поле fields
  */
 
+ import 'reflect-metadata';
+
 class SimpleExample{
     @FieldCount()
     public name: string;
@@ -12,5 +14,12 @@ class SimpleExample{
 
     constructor(name: string) {
         this.name = name;
+    }
+}
+
+function FieldCount (): any {
+    const fun = function(target: { fields: [] }, propertyKey: string) {
+         const property = Reflect.getMetadata("design:type", target, propertyKey);
+         target.fields.push(property);
     }
 }

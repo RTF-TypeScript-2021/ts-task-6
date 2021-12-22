@@ -18,5 +18,11 @@ export class SimpleCreature{
 }
 
 
-export function LogClassInstance(){
+export function LogClassInstance<T extends { new(...args: any[]): object }>(constructor: T) {
+    return class extends constructor {
+        constructor(...args: any[]) {
+            console.log(`${constructor.name} created with args: ${args.join(', ')}`);
+            super(args);
+        }
+    }
 }
