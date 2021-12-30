@@ -1,13 +1,15 @@
 import { LogClassInstance } from '../task-1';
 
+
 /**
  * Задание 3. No more extensions!
  * Реализуйте декоратор класса, который предотвратит дальнейшее добавление/изменение функций класса.
  */
 
-@LogClassInstance
+
 @PreventExtensions
-export class PartlyExtendableCreature{
+@LogClassInstance
+class PartlyExtendableCreature{
     public readonly name: string;
 
     constructor(name: string) {
@@ -15,3 +17,12 @@ export class PartlyExtendableCreature{
     }
 }
 
+function PreventExtensions<TFunction extends Function>(target: TFunction) {
+    Object.freeze(target);
+    Object.freeze(target.prototype);
+}
+
+Object.defineProperty(PartlyExtendableCreature, 'param', {
+    value: 17
+});
+console.log(PartlyExtendableCreature.param)
