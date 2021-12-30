@@ -11,3 +11,14 @@ export class Square{
         return sideLength * sideLength;
     }
 }
+let square = new Square();
+console.log(square.getArea(5.9));
+
+function OnlyInteger(target: object, method: string){
+    const originalMethod =  target[method];
+    target[method] = function(args: number){
+        args = Math.round(args);
+
+        return originalMethod.call(this, args);
+    }
+}
